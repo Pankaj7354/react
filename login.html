@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusSign - 3D Registration Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .form-container {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transition: all 0.5s ease;
+        }
+
+        .form-card {
+            transform-style: preserve-3d;
+            transform: rotateY(0deg) rotateX(0deg);
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.1),
+                0 3px 10px rgba(0, 0, 0, 0.07);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .form-card:hover {
+            transform: rotateY(2deg) rotateX(2deg) translateZ(10px);
+        }
+
+        .input-3d {
+            transform-style: preserve-3d;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-3d:focus {
+            transform: translateZ(5px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-3d {
+            transform-style: preserve-3d;
+            transform: translateZ(0);
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 4px 15px rgba(102, 126, 234, 0.4),
+                0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-3d:hover {
+            transform: translateZ(5px) translateY(-3px);
+            box-shadow: 
+                0 12px 30px rgba(102, 126, 234, 0.5),
+                0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-3d:active {
+            transform: translateZ(2px) translateY(-1px);
+        }
+
+        .social-btn-3d {
+            transform-style: preserve-3d;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn-3d:hover {
+            transform: translateZ(3px) translateY(-2px);
+        }
+
+        .form-group {
+            transform-style: preserve-3d;
+            animation: slideInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px) translateZ(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) translateZ(0);
+            }
+        }
+
+        .form-group:nth-child(1) { animation-delay: 0.1s; }
+        .form-group:nth-child(2) { animation-delay: 0.2s; }
+        .form-group:nth-child(3) { animation-delay: 0.3s; }
+        .form-group:nth-child(4) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+    <div class="form-container">
+        <div class="form-card bg-white/95 backdrop-blur-md rounded-2xl p-8 w-full max-w-md relative overflow-hidden">
+            <div class="relative z-10">
+                <div class="text-center mb-8">
+                    <h1 class="text-3xl font-bold bg-gradient-to-r from-purple-600 via-blue-600 to-pink-600 bg-clip-text text-transparent mb-2">
+                        NexusSign
+                    </h1>
+                    <p class="text-gray-600">Create your account</p>
+                </div>
+
+                <form id="registrationForm" class="space-y-6">
+                    <div class="form-group">
+                        <label class="block text-sm font-medium text-gray-700 mb-2 uppercase tracking-wider">Full Name</label>
+                        <input type="text" 
+                               class="input-3d w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-0 transition-all duration-300"
+                               placeholder="Enter your full name"
+                               required>
+                        <div class="text-red-500 text-sm mt-1 hidden">Please enter a valid name</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="block text-sm font-medium text-gray-700 mb-2 uppercase tracking-wider">Email Address</label>
+                        <input type="email" 
+                               class="input-3d w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-0 transition-all duration-300"
+                               placeholder="Enter your email"
+                               required>
+                        <div class="text-red-500 text-sm mt-1 hidden">Please enter a valid email</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="block text-sm font-medium text-gray-700 mb-2 uppercase tracking-wider">Password</label>
+                        <div class="relative">
+                            <input type="password" 
+                                   class="input-3d w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-pink-500 focus:ring-0 transition-all duration-300 pr-10"
+                                   placeholder="Create strong password"
+                                   required>
+                            <span class="password-toggle absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 cursor-pointer hover:text-purple-600 transition-colors">
+                                👁️
+                            </span>
+                        </div>
+                        <div class="text-red-500 text-sm mt-1 hidden">Password must be at least 8 characters</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="block text-sm font-medium text-gray-700 mb-2 uppercase tracking-wider">Confirm Password</label>
+                        <div class="relative">
+                            <input type="password" 
+                                   class="input-3d w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-0 transition-all duration-300 pr-10"
+                                   placeholder="Confirm your password"
+                                   required>
+                            <span class="password-toggle absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 cursor-pointer hover:text-purple-600 transition-colors">
+                                👁️
+                            </span>
+                        </div>
+                        <div class="text-red-500 text-sm mt-1 hidden">Passwords must match</div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="flex items-center">
+                            <input type="checkbox" 
+                                   class="terms-checkbox h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
+                                   required>
+                            <label class="ml-2 block text-sm text-gray-700">
+                                I agree to the <a href="#" class="text-purple-600 hover:text-purple-800 font-medium">Terms</a> and <a href="#" class="text-purple-600 hover:text-purple-800 font-medium">Privacy Policy</a>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-3d w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-3 px-6 rounded-xl font-semibold transition-all duration-300 hover:from-purple-700 hover:to-blue-700">
+                        Create Account
+                    </button>
+                </form>
+
+                <div class="mt-8 pt-6 border-t border-gray-200">
+                    <p class="text-center text-gray-600 mb-4">Or continue with</p>
+                    <div class="flex space-x-4 justify-center">
+                        <button class="social-btn-3d flex items-center justify-center px-4 py-2 border border-gray-300 rounded-xl bg-white text-gray-700 font-medium hover:border-purple-400 hover:text-purple-600 transition-all duration-300">
+                            <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="#DB4437">
+                                <path d="M12 11H20.53C20.8 11 21 11.2 21 11.47V12.53C21 12.8 20.8 13 20.53 13H12V11Z"/>
+                                <path d="M12 8H19.53C19.8 8 20 8.2 20 8.47V9.53C20 9.8 19.8 10 19.53 10H12V8Z"/>
+                                <path d="M12 5H18.53C18.8 5 19 5.2 19 5.47V6.53C19 6.8 18.8 7 18.53 7H12V5Z"/>
+                                <path d="M5 3C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V16H12V19H5V5H12V8H21V5C21 3.89543 20.1046 3 19 3H5Z"/>
+                            </svg>
+                            Google
+                        </button>
+                        <button class="social-btn-3d flex items-center justify-center px-4 py-2 border border-gray-300 rounded-xl bg-white text-gray-700 font-medium hover:border-blue-400 hover:text-blue-600 transition-all duration-300">
+                            <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="#4267B2">
+                                <path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96C18.34 21.21 22 17.06 22 12.06C22 6.53 17.5 2.04 12 2.04Z"/>
+                            </svg>
+                            Facebook
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mt-6 text-center">
+                    <p class="text-gray-600">
+                        Already have an account? 
+                        <a href="#" class="text-purple-600 hover:text-purple-800 font-medium transition-colors">Sign In</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('registrationForm');
+            const passwordToggles = document.querySelectorAll('.password-toggle');
+            const passwordInputs = document.querySelectorAll('input[type="password"]');
+
+            // Password visibility toggle
+            passwordToggles.forEach((toggle, index) => {
+                toggle.addEventListener('click', function() {
+                    const type = passwordInputs[index].getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordInputs[index].setAttribute('type', type);
+                });
+            });
+
+            // Form validation
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                let isValid = true;
+                const inputs = form.querySelectorAll('input');
+                
+                inputs.forEach(input => {
+                    const errorDiv = input.nextElementSibling?.nextElementSibling || input.parentElement.nextElementSibling;
+                    
+                    if (input.type === 'email' && !isValidEmail(input.value)) {
+                        showError(input, errorDiv);
+                        isValid = false;
+                    } else if (input.type === 'password') {
+                        if (input.id.includes('password') && input.value.length < 8) {
+                            showError(input, errorDiv);
+                            isValid = false;
+                        } else if (input.id.includes('confirm') && input.value !== document.querySelector('input[type="password"]').value) {
+                            showError(input, errorDiv);
+                            isValid = false;
+                        } else {
+                            hideError(input, errorDiv);
+                        }
+                    } else if (input.type === 'text' && input.value.trim().length < 2) {
+                        showError(input, errorDiv);
+                        isValid = false;
+                    } else if (input.type === 'checkbox' && !input.checked) {
+                        isValid = false;
+                    } else {
+                        hideError(input, errorDiv);
+                    }
+                });
+
+                if (isValid) {
+                    const submitBtn = form.querySelector('button[type="submit"]');
+                    submitBtn.textContent = 'Creating Account...';
+                    submitBtn.disabled = true;
+                    
+                    setTimeout(() => {
+                        alert('Welcome to Nexus! Your account has been created successfully.');
+                        form.reset();
+                        submitBtn.textContent = 'Create Account';
+                        submitBtn.disabled = false;
+                    }, 2000);
+                }
+            });
+
+            function isValidEmail(email) {
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+            }
+
+            function showError(input, errorDiv) {
+                input.classList.add('border-red-500');
+                if (errorDiv) errorDiv.classList.remove('hidden');
+            }
+
+            function hideError(input, errorDiv) {
+                input.classList.remove('border-red-500');
+                if (errorDiv) errorDiv.classList.add('hidden');
+            }
+
+            // Real-time validation
+            const allInputs = form.querySelectorAll('input');
+            allInputs.forEach(input => {
+                input.addEventListener('input', function() {
+                    const errorDiv = this.nextElementSibling?.nextElementSibling || this.parentElement.nextElementSibling;
+                    hideError(this, errorDiv);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
