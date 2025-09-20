@@ -7,6 +7,7 @@ function Navbar() {
       <Link to="/users">Register</Link>
       <Link to='/about' >About</Link>
       <Link to='/clock'>Clock</Link>
+      <Link to='/Companies'>Companies Data</Link>
     </nav>
   );
 }

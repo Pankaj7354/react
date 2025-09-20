@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Users from "./pages/Users";
 import About from './pages/About';
 import Clock from './pages/Clock';
+import Companies from './pages/Companies_Name';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/users" element={<Users />} />
         <Route path="/about" element={<About/>}/>
         <Route path ='/clock' element={<Clock/>}/>
+        <Route path ="/Companies" element = {<Companies Data/>}/>
       </Routes>
     </BrowserRouter>
   );
